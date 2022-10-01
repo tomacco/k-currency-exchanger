@@ -39,8 +39,7 @@ class CurrencyViewModel {
 extension CurrencyViewModel {
     
     struct State {
-        var currencyRates: CurrencyRatesModel = CurrencyRatesModel(currencyRates: [:],
-                                                                   baseCurrency: "EUR")
+        var currencyRates: CurrencyRatesModel = CurrencyRatesModel()
         var currencyApiError: Error? = nil
         
         
