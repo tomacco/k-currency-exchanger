@@ -8,8 +8,8 @@
 import Foundation
 
 struct CurrencyRatesModel {
-    let currencyRates: [Currency : Double] = [:]
-    let baseCurrency: Currency = ""
+    let currencyRates: [Currency : Double]
+    let baseCurrency: Currency
     
     lazy var supportedCurrencies:[Currency] = {
         Array(currencyRates.keys)

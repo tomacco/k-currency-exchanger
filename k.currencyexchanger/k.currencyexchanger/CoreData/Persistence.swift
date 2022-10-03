@@ -14,10 +14,14 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-        }
+       
+        let newTransaction = UserCurrencyTransaction(context: viewContext)
+        newTransaction.amount = 1000
+        newTransaction.currency = "EUR"
+        newTransaction.id = UUID().uuidString
+        newTransaction.transactionType = .debit
+        newTransaction.createdAt = Date()
+    
         do {
             try viewContext.save()
         } catch {

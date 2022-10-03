@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2C548E0428E8BB1C003DF733 /* UserCurrencyTxService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C548E0328E8BB1C003DF733 /* UserCurrencyTxService.swift */; };
-		2C548E0628E8BB63003DF733 /* UserCurrencyTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C548E0528E8BB63003DF733 /* UserCurrencyTransaction.swift */; };
+		2C1AA7F628EB162500408B99 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AA7F528EB162500408B99 /* MainViewModel.swift */; };
+		2C548E0428E8BB1C003DF733 /* UserCurrencyTxRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C548E0328E8BB1C003DF733 /* UserCurrencyTxRepo.swift */; };
+		2C548E0928EA252F003DF733 /* UserCurrencyTxService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C548E0828EA252F003DF733 /* UserCurrencyTxService.swift */; };
+		2C548E0C28EA267E003DF733 /* TxType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C548E0B28EA267E003DF733 /* TxType.swift */; };
+		2C548E1028EA2BD1003DF733 /* UserCurrencyTransaction+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C548E0F28EA2BD1003DF733 /* UserCurrencyTransaction+Extension.swift */; };
 		2C589B8528DC95C4000775D0 /* k_currencyexchangerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C589B8428DC95C4000775D0 /* k_currencyexchangerApp.swift */; };
 		2C589B8728DC95C4000775D0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C589B8628DC95C4000775D0 /* ContentView.swift */; };
 		2C589B8928DC95C6000775D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C589B8828DC95C6000775D0 /* Assets.xcassets */; };
@@ -54,8 +57,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2C548E0328E8BB1C003DF733 /* UserCurrencyTxService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCurrencyTxService.swift; sourceTree = "<group>"; };
-		2C548E0528E8BB63003DF733 /* UserCurrencyTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCurrencyTransaction.swift; sourceTree = "<group>"; };
+		2C1AA7F528EB162500408B99 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		2C548E0328E8BB1C003DF733 /* UserCurrencyTxRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCurrencyTxRepo.swift; sourceTree = "<group>"; };
+		2C548E0828EA252F003DF733 /* UserCurrencyTxService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCurrencyTxService.swift; sourceTree = "<group>"; };
+		2C548E0B28EA267E003DF733 /* TxType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxType.swift; sourceTree = "<group>"; };
+		2C548E0F28EA2BD1003DF733 /* UserCurrencyTransaction+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserCurrencyTransaction+Extension.swift"; sourceTree = "<group>"; };
 		2C589B8128DC95C4000775D0 /* k.currencyexchanger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = k.currencyexchanger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C589B8428DC95C4000775D0 /* k_currencyexchangerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = k_currencyexchangerApp.swift; sourceTree = "<group>"; };
 		2C589B8628DC95C4000775D0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -115,8 +121,8 @@
 		2C548E0228E8BB04003DF733 /* UserCurrencyTxService */ = {
 			isa = PBXGroup;
 			children = (
+				2C548E0A28EA2533003DF733 /* Service */,
 				2C548E0728E8BB80003DF733 /* Model */,
-				2C548E0328E8BB1C003DF733 /* UserCurrencyTxService.swift */,
 			);
 			path = UserCurrencyTxService;
 			sourceTree = "<group>";
@@ -124,9 +130,19 @@
 		2C548E0728E8BB80003DF733 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2C548E0528E8BB63003DF733 /* UserCurrencyTransaction.swift */,
+				2C548E0328E8BB1C003DF733 /* UserCurrencyTxRepo.swift */,
+				2C548E0B28EA267E003DF733 /* TxType.swift */,
+				2C548E0F28EA2BD1003DF733 /* UserCurrencyTransaction+Extension.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		2C548E0A28EA2533003DF733 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				2C548E0828EA252F003DF733 /* UserCurrencyTxService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		2C589B7828DC95C4000775D0 = {
@@ -212,9 +228,9 @@
 			isa = PBXGroup;
 			children = (
 				2C589B8628DC95C4000775D0 /* ContentView.swift */,
-				2C5F3B8928E5A68900CDF410 /* CurrencyViewModel.swift */,
 				2C5F3B8B28E5A97E00CDF410 /* CurrencyHTTPService.swift */,
 				2C5F3B8D28E5AA2A00CDF410 /* CurrencyRatesModel.swift */,
+				2C1AA7F528EB162500408B99 /* MainViewModel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -268,6 +284,7 @@
 		2C6F4ACA28E88B8000CFFFD3 /* CurrencyExchangeService */ = {
 			isa = PBXGroup;
 			children = (
+				2C5F3B8928E5A68900CDF410 /* CurrencyViewModel.swift */,
 				2C6F4ACE28E8949E00CFFFD3 /* Model */,
 				2C6F4ACB28E88B8900CFFFD3 /* FeesRule */,
 				2C6F4AC828E5E74900CFFFD3 /* CurrencyExchangeService.swift */,
@@ -426,20 +443,23 @@
 				2C5F3B8C28E5A97E00CDF410 /* CurrencyHTTPService.swift in Sources */,
 				2C6F4AD028E894AE00CFFFD3 /* CurrencyExchangeRequest.swift in Sources */,
 				2C6F4AD428E89E3100CFFFD3 /* CalculatedCurrencyExchange.swift in Sources */,
+				2C548E0C28EA267E003DF733 /* TxType.swift in Sources */,
 				2C5F3B8E28E5AA2A00CDF410 /* CurrencyRatesModel.swift in Sources */,
-				2C548E0428E8BB1C003DF733 /* UserCurrencyTxService.swift in Sources */,
+				2C1AA7F628EB162500408B99 /* MainViewModel.swift in Sources */,
+				2C548E0428E8BB1C003DF733 /* UserCurrencyTxRepo.swift in Sources */,
 				2C589BB728DC99E8000775D0 /* Snippets.swift in Sources */,
 				2C589B9128DC95C6000775D0 /* k_currencyexchanger.xcdatamodeld in Sources */,
 				2C5F3B8728E58A7600CDF410 /* ErrorCategory.swift in Sources */,
 				2C5F3B7E28E5806200CDF410 /* ExchangesRatesResponse.swift in Sources */,
+				2C548E1028EA2BD1003DF733 /* UserCurrencyTransaction+Extension.swift in Sources */,
 				2C5F3B8A28E5A68900CDF410 /* CurrencyViewModel.swift in Sources */,
 				2C589BBD28DCB3AA000775D0 /* HTTPClient.swift in Sources */,
+				2C548E0928EA252F003DF733 /* UserCurrencyTxService.swift in Sources */,
 				2C589B8E28DC95C6000775D0 /* Persistence.swift in Sources */,
 				2C589B8728DC95C4000775D0 /* ContentView.swift in Sources */,
 				2C6F4AC928E5E74900CFFFD3 /* CurrencyExchangeService.swift in Sources */,
 				2C5F3B8228E581A500CDF410 /* InfoPlist.swift in Sources */,
 				2C589BBB28DCB343000775D0 /* Router.swift in Sources */,
-				2C548E0628E8BB63003DF733 /* UserCurrencyTransaction.swift in Sources */,
 				2C5F3B7B28E5801F00CDF410 /* Endpoints.swift in Sources */,
 				2C6F4ACD28E88BA300CFFFD3 /* FeesRule.swift in Sources */,
 				2C5F3B8528E58A4600CDF410 /* NetworkError.swift in Sources */,

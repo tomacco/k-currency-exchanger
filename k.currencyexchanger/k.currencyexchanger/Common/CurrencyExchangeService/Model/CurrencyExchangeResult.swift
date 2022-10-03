@@ -11,6 +11,8 @@ struct CurrencyExchangeResult {
     let calculatedExchange: CalculatedCurrencyExchange
     let applicableFees: [Currency: Decimal]
     var isSuccessfulExchange: Bool {
-        return calculatedExchange.isSuccessfulExchange
+        let isAmountPositive = calculatedExchange.from.amount > 0
+        return calculatedExchange.isSuccessfulExchange && isAmountPositive
     }
+    var error: String?
 }

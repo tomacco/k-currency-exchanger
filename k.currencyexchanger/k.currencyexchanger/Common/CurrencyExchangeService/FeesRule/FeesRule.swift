@@ -10,8 +10,19 @@ import Foundation
 protocol FeesRule {
     func calculateFee(
         exchangeRequest: CalculatedCurrencyExchange,
-        forTxHistory txHistory: [UserCurrencyTransaction]
+        forTxHistory txHistory: [UserCurrencyTransaction],
+        currencyExchangeService: CurrencyExchangeService
     ) -> [Currency: Decimal]
+}
+
+class FeesRulesLoader {
+    
+    static func load() -> [FeesRule] {
+        return [
+            FixedFeeOverXTransactions(),
+            FeeOverXTransactionsPerDay()
+        ]
+    }
 }
 
 struct FixedFeeOverXTransactions: FeesRule {
@@ -21,7 +32,8 @@ struct FixedFeeOverXTransactions: FeesRule {
     
     func calculateFee(
         exchangeRequest: CalculatedCurrencyExchange,
-        forTxHistory txHistory: [UserCurrencyTransaction]
+        forTxHistory txHistory: [UserCurrencyTransaction],
+        currencyExchangeService: CurrencyExchangeService
     ) -> [Currency: Decimal] {
         if !exchangeRequest.isSuccessfulExchange {
             return [:]
@@ -42,11 +54,11 @@ struct FeeOverXTransactionsPerDay: FeesRule {
     let dailyTransactionsAllowedWithoutFee = 15
     let fixedEurFee : Decimal = 0.3
     let targetCurrencyFeePercentage : Decimal = 1.2 / 100
-    let currencyExchangeService = CurrencyExchangeService.shared
-    
+
     func calculateFee(
         exchangeRequest: CalculatedCurrencyExchange,
-        forTxHistory txHistory: [UserCurrencyTransaction]
+        forTxHistory txHistory: [UserCurrencyTransaction],
+        currencyExchangeService: CurrencyExchangeService
     ) -> [Currency: Decimal] {
         if !exchangeRequest.isSuccessfulExchange {
             return [:]
@@ -56,10 +68,9 @@ struct FeeOverXTransactionsPerDay: FeesRule {
             .filter { transaction in
                 calendar.isDateInToday(transaction.createdAt!) //TODO check this forced unwrapping in CoreData Model definition
             }
-            .filter { transaction in
-                transaction.isCurrencyConversion
+            .compactMap { transaction in
+                transaction.currencyExchangeTxId
             }
-        
         if todayTxs.count <= dailyTransactionsAllowedWithoutFee {
             return [:]
         }

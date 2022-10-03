@@ -10,7 +10,10 @@ import SwiftUI
 @main
 struct CurrencyExchangeApp: App {
     let persistenceController = PersistenceController.shared
-
+    
+    init() {
+        _ = CurrencyExchangeService.shared
+    }
     var body: some Scene {
         WindowGroup {
             ContentView()

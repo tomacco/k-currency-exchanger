@@ -8,7 +8,8 @@
 import Foundation
 import Combine
 
-class CurrencyViewModel {
+class CurrencyViewModel: ObservableObject {
+    private static let fetchIntervalSeconds : TimeInterval = 60
     
     var subscriptions = Set<AnyCancellable>()
     var state = State()
@@ -19,7 +20,7 @@ class CurrencyViewModel {
         currencyHttpService.fetchCurrencieRates()
             .map({ response in Event.currencyFetchCompleted(response.toCurrencyRatesModel())})
             .catch({ Just(Event.currencyFetchError($0)) })
-            .eraseToAnyPublisher()
+                .eraseToAnyPublisher()
     }
     
     func send(_ event: Event) {
@@ -39,28 +40,41 @@ class CurrencyViewModel {
 extension CurrencyViewModel {
     
     struct State {
-        var currencyRates: CurrencyRatesModel = CurrencyRatesModel()
+        var isCurrencyRatesLoaded = false
+        var currencyRates: CurrencyRatesModel = CurrencyRatesModel(
+            currencyRates: [:],
+            baseCurrency: ""
+        )
         var currencyApiError: Error? = nil
-        
-        
     }
     
     enum Event {
-        case onAppear
+        case scheduleDataFetch
+        case fetchCurrencyRates
         case currencyFetchCompleted(CurrencyRatesModel)
         case currencyFetchError(Error)
     }
     
     func reduce(event: Event) -> AnyPublisher<Event, Never>? {
         switch event {
-        case .onAppear:
+        case .scheduleDataFetch:
+            fetchCurrenciesEvery(seconds: Self.fetchIntervalSeconds)
+            return fetchCurrenciRates()
+        case .fetchCurrencyRates:
             return fetchCurrenciRates()
         case .currencyFetchCompleted(let currencyRates):
+            self.state.isCurrencyRatesLoaded = true
             self.state.currencyRates = currencyRates
         case .currencyFetchError(let error):
             self.state.currencyApiError = error
         }
         return nil
+    }
+    
+    func fetchCurrenciesEvery(seconds: TimeInterval)  {
+        DispatchQueue.main.asyncAfter(deadline: .now() + seconds) { [weak self] in
+            self?.send(.fetchCurrencyRates)
+        }
     }
     
 }
