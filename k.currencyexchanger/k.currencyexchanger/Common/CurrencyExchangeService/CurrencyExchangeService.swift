@@ -39,9 +39,17 @@ class CurrencyExchangeService {
         }
         
         //Convert the fees to the source currency before crediting the source account.
-        let feesInSourceCurrency = self.convertFeesToCurrency(currency: currencyExchangeAttemptResult.calculatedExchange.from.currency,
-                                                              fees: currencyExchangeAttemptResult.applicableFees)
-        let amountToCredit = currencyExchangeAttemptResult.calculatedExchange.from.amount + feesInSourceCurrency
+        let areFeesValid = self.checkIfFeesCanBeApplied(
+            currencyExchangeAttemptResult.applicableFees,
+            targetExchange: currencyExchangeAttemptResult.calculatedExchange.to,
+            sourceExchange: currencyExchangeAttemptResult.calculatedExchange.from
+        )
+        if !areFeesValid {
+            currencyExchangeAttemptResult.error = "There is no enough balance 😱"
+            return currencyExchangeAttemptResult
+        }
+        
+        let amountToCredit = currencyExchangeAttemptResult.calculatedExchange.from.amount
         let currencyExchangeTxId = UUID().uuidString
         // 1. Credit the source currency
         let isCreditSuccesful = currencyTxService.performTransaction(
@@ -50,9 +58,8 @@ class CurrencyExchangeService {
             amount: amountToCredit,
             currencyExchangeTxId: currencyExchangeTxId
         )
-        
         if !isCreditSuccesful {
-            currencyExchangeAttemptResult.error = "Not enough funds."
+            currencyExchangeAttemptResult.error = "There is no enough balance 😱"
             return currencyExchangeAttemptResult
         }
         
@@ -64,7 +71,52 @@ class CurrencyExchangeService {
             currencyExchangeTxId: currencyExchangeTxId
         )
         
+        // 3. Credit all the fees
+        currencyExchangeAttemptResult.applicableFees.forEach { feeCurrency, feeAmount in
+            let isFeeCreditSuccesful = currencyTxService.performTransaction(
+                currency: feeCurrency,
+                txType: .credit,
+                amount: feeAmount,
+                currencyExchangeTxId: currencyExchangeTxId
+            )
+            
+            if !isFeeCreditSuccesful {
+                fatalError("Credit on the fee currency \(feeCurrency), amount \(feeAmount) failed! ")
+            }
+        }
+        
         return currencyExchangeAttemptResult
+    }
+    
+    func checkIfFeesCanBeApplied(
+        _ fees: [Currency: Decimal],
+        targetExchange: OptionalAmountWithCurrency,
+        sourceExchange: AmountWithCurrency
+    ) -> Bool {
+        for fee in fees {
+            let feeAmount = fee.value
+            let currency = fee.key
+            let balance = UserCurrencyTxService.shared.getBalance(forCurrency: currency)
+
+            //for target currency, use the potential balance if the operation succeeds
+            if currency == targetExchange.currency {
+                if (targetExchange.amount ?? 0) - feeAmount < 0 {
+                    return false
+                }
+            }
+            //for the source currency, substract the amount exchanged from current balance
+            else if currency == sourceExchange.currency {
+                if (balance - sourceExchange.amount - feeAmount) < 0 {
+                    return false
+                }
+            }
+            //Rest of the fees
+            else if balance - feeAmount < 0 {
+                return false
+            }
+        }
+        return true
+        
     }
     
     func calculateCurrencyExchangeWithFees(exchangeRequest: CurrencyExchangeRequest) -> CurrencyExchangeResult {

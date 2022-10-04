@@ -42,7 +42,7 @@ struct FixedFeeOverXTransactions: FeesRule {
             transaction.currencyExchangeTxId
         }
         
-        if totalTxCount.count <= firstFreeTransactionsCount {
+        if Set(totalTxCount).count < firstFreeTransactionsCount {
             return [:]
         }
         
@@ -78,7 +78,7 @@ struct FeeOverXTransactionsPerDay: FeesRule {
 
         let todayTransactionsCount = Set(todayTxs).count
         
-        if todayTransactionsCount <= dailyTransactionsAllowedWithoutFee {
+        if todayTransactionsCount < dailyTransactionsAllowedWithoutFee {
             return [:]
         }
         guard let convertedAmount = exchangeRequest.to.amount else {

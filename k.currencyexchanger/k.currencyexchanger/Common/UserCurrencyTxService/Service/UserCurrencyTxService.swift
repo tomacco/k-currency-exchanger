@@ -10,12 +10,18 @@ import Foundation
 class UserCurrencyTxService {
     
     static let shared = UserCurrencyTxService()
-    private init() {}
+    private init() {
+        
+    }
     
     private let userTxRepo = UserCurrencyTxRepo.shared
     
     func getAllTransactions() -> [UserCurrencyTransaction] {
         return userTxRepo.getAllTransactions()
+    }
+    
+    func deleteAllTransactions() {
+        userTxRepo.deleteAllTransactions()
     }
     
     func getBalance(forCurrency currency: Currency) -> Decimal {
@@ -37,13 +43,12 @@ class UserCurrencyTxService {
             }
         }
         
-        userTxRepo.saveTransaction(
+        return userTxRepo.saveTransaction(
             currency: currency,
             amount: amount,
             txType: txType,
             currencyExchangeTxId: currencyExchangeTxId
         )
-        return true
 
     }
     

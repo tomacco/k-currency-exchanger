@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2C1AA7F628EB162500408B99 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AA7F528EB162500408B99 /* MainViewModel.swift */; };
 		2C1AA7F928EC072B00408B99 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 2C1AA7F828EC072B00408B99 /* AlertToast */; };
+		2C1AA7FB28EC6E1F00408B99 /* Decimal+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AA7FA28EC6E1F00408B99 /* Decimal+extension.swift */; };
 		2C548E0428E8BB1C003DF733 /* UserCurrencyTxRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C548E0328E8BB1C003DF733 /* UserCurrencyTxRepo.swift */; };
 		2C548E0928EA252F003DF733 /* UserCurrencyTxService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C548E0828EA252F003DF733 /* UserCurrencyTxService.swift */; };
 		2C548E0C28EA267E003DF733 /* TxType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C548E0B28EA267E003DF733 /* TxType.swift */; };
@@ -59,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		2C1AA7F528EB162500408B99 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		2C1AA7FA28EC6E1F00408B99 /* Decimal+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+extension.swift"; sourceTree = "<group>"; };
 		2C548E0328E8BB1C003DF733 /* UserCurrencyTxRepo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCurrencyTxRepo.swift; sourceTree = "<group>"; };
 		2C548E0828EA252F003DF733 /* UserCurrencyTxService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCurrencyTxService.swift; sourceTree = "<group>"; };
 		2C548E0B28EA267E003DF733 /* TxType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxType.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 			isa = PBXGroup;
 			children = (
 				2C5F3B8128E581A500CDF410 /* InfoPlist.swift */,
+				2C1AA7FA28EC6E1F00408B99 /* Decimal+extension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 				2C5F3B8C28E5A97E00CDF410 /* CurrencyHTTPService.swift in Sources */,
 				2C6F4AD028E894AE00CFFFD3 /* CurrencyExchangeRequest.swift in Sources */,
 				2C6F4AD428E89E3100CFFFD3 /* CalculatedCurrencyExchange.swift in Sources */,
+				2C1AA7FB28EC6E1F00408B99 /* Decimal+extension.swift in Sources */,
 				2C548E0C28EA267E003DF733 /* TxType.swift in Sources */,
 				2C5F3B8E28E5AA2A00CDF410 /* CurrencyRatesModel.swift in Sources */,
 				2C1AA7F628EB162500408B99 /* MainViewModel.swift in Sources */,
