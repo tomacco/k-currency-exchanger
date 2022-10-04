@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C1AA7F628EB162500408B99 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1AA7F528EB162500408B99 /* MainViewModel.swift */; };
+		2C1AA7F928EC072B00408B99 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 2C1AA7F828EC072B00408B99 /* AlertToast */; };
 		2C548E0428E8BB1C003DF733 /* UserCurrencyTxRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C548E0328E8BB1C003DF733 /* UserCurrencyTxRepo.swift */; };
 		2C548E0928EA252F003DF733 /* UserCurrencyTxService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C548E0828EA252F003DF733 /* UserCurrencyTxService.swift */; };
 		2C548E0C28EA267E003DF733 /* TxType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C548E0B28EA267E003DF733 /* TxType.swift */; };
@@ -98,6 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C1AA7F928EC072B00408B99 /* AlertToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +328,9 @@
 			dependencies = (
 			);
 			name = k.currencyexchanger;
+			packageProductDependencies = (
+				2C1AA7F828EC072B00408B99 /* AlertToast */,
+			);
 			productName = k.currencyexchanger;
 			productReference = 2C589B8128DC95C4000775D0 /* k.currencyexchanger.app */;
 			productType = "com.apple.product-type.application";
@@ -398,6 +403,9 @@
 				Base,
 			);
 			mainGroup = 2C589B7828DC95C4000775D0;
+			packageReferences = (
+				2C1AA7F728EC072B00408B99 /* XCRemoteSwiftPackageReference "AlertToast" */,
+			);
 			productRefGroup = 2C589B8228DC95C4000775D0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -791,6 +799,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2C1AA7F728EC072B00408B99 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elai950/AlertToast.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2C1AA7F828EC072B00408B99 /* AlertToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2C1AA7F728EC072B00408B99 /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		2C589B8F28DC95C6000775D0 /* k_currencyexchanger.xcdatamodeld */ = {

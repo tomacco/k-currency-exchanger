@@ -38,7 +38,11 @@ struct FixedFeeOverXTransactions: FeesRule {
         if !exchangeRequest.isSuccessfulExchange {
             return [:]
         }
-        if txHistory.count <= firstFreeTransactionsCount {
+        let totalTxCount = txHistory.compactMap { transaction in
+            transaction.currencyExchangeTxId
+        }
+        
+        if totalTxCount.count <= firstFreeTransactionsCount {
             return [:]
         }
         
@@ -71,7 +75,10 @@ struct FeeOverXTransactionsPerDay: FeesRule {
             .compactMap { transaction in
                 transaction.currencyExchangeTxId
             }
-        if todayTxs.count <= dailyTransactionsAllowedWithoutFee {
+
+        let todayTransactionsCount = Set(todayTxs).count
+        
+        if todayTransactionsCount <= dailyTransactionsAllowedWithoutFee {
             return [:]
         }
         guard let convertedAmount = exchangeRequest.to.amount else {

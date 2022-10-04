@@ -47,6 +47,7 @@ extension MainViewModel {
         switch event {
         case .presentCurrencyExchangePopup:
             DispatchQueue.main.async {
+                self.state.isErrorPopupPresented = false
                 self.state.isCurrencyExchangePopupPresented = true
             }
         case .attemptCurrencyExchange(let sourceCurrency, let targetCurrency, let amount):
@@ -63,6 +64,7 @@ extension MainViewModel {
             if !requestResult.isSuccessfulExchange || requestResult.error != nil {
                 DispatchQueue.main.async {
                     self.state.errorText = requestResult.error ?? "Unknown error"
+                    self.state.isCurrencyExchangePopupPresented = false
                     self.state.isErrorPopupPresented = true
                 }
                 return nil
